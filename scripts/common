@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+
+# Buildkite doesn't check out a full history from the remote (just the
+# single commit) so you end up with a detached head and git rev-parse
+# doesn't work
+if [ "$BUILDKITE" = "true" ]; then
+    GIT_SHA=${BUILDKITE_COMMIT:0:7}
+else
+    GIT_SHA=$(git -C "$PACKAGE_ROOT" rev-parse --short=7 HEAD)
+fi
+
+if [ "$BUILDKITE" = "true" ]; then
+    GIT_BRANCH=$BUILDKITE_BRANCH
+else
+    GIT_BRANCH=$(git -C "$PACKAGE_ROOT" symbolic-ref --short HEAD)
+fi
+
+REGISTRY=mrcide
+NAME=monitor-proxy
+
+APP_DOCKER_COMMIT_TAG=$REGISTRY/$NAME:$GIT_SHA
+APP_DOCKER_BRANCH_TAG=$REGISTRY/$NAME:$GIT_BRANCH
