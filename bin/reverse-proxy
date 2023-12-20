@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -eu
 
-if [ "$#" -eq 4 ]; then
-    export HTTP_HOST=$2
-    export HTTP_PORT=$3
-    export HTTPS_PORT=$4
+if [ "$#" -eq 6 ]; then
+    export PROMETHEUS_SERVICE=$1
+    export ALERTMANAGER_SERVICE=$2
+    export GRAFANA_SERVICE=$3
+    export HTTP_HOST=$4
+    export HTTP_PORT=$5
+    export HTTPS_PORT=$6
 else
     echo "Usage: <prometheus-service> <alertmanager-service> <grafana-service> <hostname> <port-http> <port-https>"
     echo "e.g. docker run ... container:8888 container2:8889 container3:8890 example.com 80 443"
@@ -12,7 +15,7 @@ else
 fi
 
 echo "We will listen on ports $HTTP_PORT (http) and $HTTPS_PORT (https)"
-echo "with hostname $HTTP_HOST, proxying the service http://$SERVICE"
+echo "with hostname $HTTP_HOST, proxying the services http://$PROMETHEUS_SERVICE http://$ALERTMANAGER_SERVICE http://$GRAFANA_SERVICE"
 
 envsubst '$HTTP_HOST,$HTTP_PORT,$HTTPS_PORT,$PROMETHEUS_SERVICE,$ALERTMANAGER_SERVICE,$GRAFANA_SERVICE' \
          < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
