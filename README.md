@@ -1,6 +1,6 @@
 ## Dockerised reverse proxy
 
-[![Build Status](https://travis-ci.com/reside-ic/proxy-nginx.svg?branch=master)](https://travis-ci.com/reside-ic/proxy-nginx)
+[![Build status](https://badge.buildkite.com/1fe33f85938873ee5cd8e4a33bd9a3aefce3039cc8cd0ddcc0.svg)](https://buildkite.com/mrc-ide/monitor-proxy)
 
 This repository contains support for running a `nginx` proxy in a docker container in order to secure a web application.  It makes a number of assumptions:
 
