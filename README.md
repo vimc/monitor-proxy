@@ -1,3 +1,8 @@
+> [!NOTE]  
+> The repository has been archived as its functionality was merged into [vimc/montagu-monitor](https://github.com/vimc/montagu-monitor).
+> 
+> See https://github.com/vimc/montagu-monitor/pull/40.
+
 ## Dockerised reverse proxy
 
 [![Build status](https://badge.buildkite.com/1fe33f85938873ee5cd8e4a33bd9a3aefce3039cc8cd0ddcc0.svg)](https://buildkite.com/mrc-ide/monitor-proxy)
